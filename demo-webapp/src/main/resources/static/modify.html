@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh">
+ 
+<head>
+  <head>
+    <meta charset="UTF-8">
+    <title>modify</title>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  </head>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+         
+        html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background: url(images/Desert.jpg) no-repeat 0px 0px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+        }
+         
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+         
+        #ModifyDiv {
+            width: 37%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            background-color: rgba(75, 81, 95, 0.3);
+            box-shadow: 7px 7px 17px rgba(52, 56, 66, 0.5);
+            border-radius: 5px;
+        }
+         
+        #name_trip {
+            margin-left: 50px;
+            color: red;
+        }
+         
+        p {
+            margin-top: 30px;
+            margin-left: 20px;
+            color: azure;
+        }
+         
+        input {
+            margin-left: 15px;
+            border-radius: 5px;
+            border-style: hidden;
+            height: 30px;
+            width: 140px;
+            background-color: rgba(216, 191, 216, 0.5);
+            outline: none;
+            color: #f0edf3;
+            padding-left: 10px;
+        }
+         
+        .button {
+            border-color: cornsilk;
+            background-color: rgba(100, 149, 237, .7);
+            color: aliceblue;
+            border-style: hidden;
+            border-radius: 5px;
+            width: 100px;
+            height: 31px;
+            font-size: 16px;
+        }
+        
+        .content{
+		  padding:0 auto;
+		  margin: 0 auto;
+		  height: 450px;
+		  width: 100%;
+		  background: url(../Image/Login-Img/login_bg.jpg) no-repeat center;
+		  background-size:100% 450px ;
+		  margin-top: 25px;
+		}
+		.login-wrap{
+		  position: absolute;
+		  width:320px;
+		  height: 300px;
+		  border-radius: 10px;
+		  -webkit-border-radius: 10px;
+		  -moz-border-radius: 10px;
+		  right:200px;
+		  margin-top: 75px;
+		  background: url("../Image/Login-Img/form_bg.png") no-repeat;
+		  background-size: 100%;
+		}
+		.login-wrap h3{
+		  color:#fff;
+		  font-size: 18px;
+		  text-align: center;
+		}
+		.name,.code{
+		  border:1px solid #fff;
+		  width:230px;
+		  height: 40px;
+		  margin-left: 25px;
+		  margin-bottom: 20px;
+		  padding-left: 40px;
+		}
+		.name{
+		  background: url("../Image/Login-Img/user.png") no-repeat left;
+		  background-position-x:12px;
+		}
+		.code{
+		  background: url("../Image/Login-Img/passwd.png") no-repeat left;
+		  background-position-x:12px;
+		}
+		.btn input{
+		  height: 40px;
+		  width: 120px;
+		  float: left;
+		  margin-right: 25px;
+		  border:none;
+		  color:#fff;
+		  font-size: 16px;
+		  -webkit-border-radius: 10px;
+		  -moz-border-radius: 10px;
+		  border-radius: 10px;
+		  margin-top: 10px;
+		  cursor: pointer;
+		}
+		input:active{border-color:#147a62}
+		.submit{background: #ea8c37;margin-left: 25px;}
+		.reset{background: #bbb;}
+		/**错误信息提醒**/
+		.msg{
+		  color: #ea8c37;
+		  font-size: 14px;
+		  padding-left: 40px;
+		  padding-top: 10px;
+		  clear: both;
+		  font-weight: bold;
+		}
+    </style>
+</head>
+ 
+<body>
+    <div id="ModifyDiv">
+        <form id="form" onsubmit="return false;">
+            <h1 style="text-align: center;color: aliceblue;">修改用户信息</h1>
+            
+            <p>用 户 名 ：<input id="userName" type="text" disabled='disabled' ><label id="name_trip"></label></p> 
+ 			<p>真实姓名：<input id="userRealName" type="text"><label id="password_trip"></label></p>
+ 			<p>手机号码：<input id="telephone" type="text"><label id="password_trip"></label></p>
+ 			<p>邮&emsp;&emsp;箱：<input id="email" type="text"><label id="password_trip"></label></p>		
+ 				
+ 			<div id="CheckMsg" class="msg"></div>
+ 			
+            <div style="text-align: center;margin-top: 30px;">
+                <input type="submit" class="button" id="modify" value="提交">
+            </div>
+            
+        </form>
+    </div>
+</body>
+
+<script type="text/javascript">
+	window.onload = function(){
+		 document.getElementById("userName").value=getUrlQueryString("userName");
+	}
+
+	function getUrlQueryString(names, urls) {
+		urls = urls || window.location.href;
+		urls && urls.indexOf("?") > -1 ? urls = urls
+				.substring(urls.indexOf("?") + 1) : "";
+		var reg = new RegExp("(^|&)" + names + "=([^&]*)(&|$)", "i");
+		var r = urls ? urls.match(reg) : window.location.search.substr(1)
+				.match(reg);
+		if (r != null && r[2] != "")
+			return unescape(r[2]);
+		return null;
+	};
+//错误信息提醒
+	function showMsg(msg){
+	  $("#CheckMsg").text(msg);
+	}
+	
+	$("#modify").click(function (){
+		var userName = $("#userName").val();
+		var userRealName = $("#userRealName").val();
+		var telephone = $("#telephone").val();
+		var email = $("#email").val();
+		if(!userRealName){
+			userRealName=null;
+		}
+		if(!telephone){
+			telephone=null;
+		}
+		if(!email){
+			email=null;
+		}
+		
+		var url = "http://edgeservice/api/dataoperation/operation/modifyUser";
+		var data = {"userName": userName,"userRealName":userRealName,"telephone":telephone,"email":email};
+		
+		
+		$.ajax({
+		    url : url,// 获取自己系统后台用户信息接口
+		    data :data,
+		    async: false,
+		    type : "POST",
+		    dataType: "json",
+		    success : function(res) {
+		    	if (res==1) {
+		    		setTimeout(function () {//做延时以便显示登录状态值
+			            console.log(res);
+			            showMsg("用户信息修改成功！");
+					    window.location.href = 'userInfo.html'
+			       },100)
+		    	} else if(res==0){
+		    		showMsg("用户信息修改失败，请重试");//显示登录失败的原因
+		    		return false;
+		    	}
+		    },
+		    error : function(err){
+			  console.log(err);
+		    }
+		  });
+	});
+
+</script>
+</html>
