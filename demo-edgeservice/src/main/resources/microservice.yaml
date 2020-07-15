@@ -48,14 +48,6 @@ cse:
     secretKey: yiDPKm3fLwQSBmi60XT6GcsJ88KIf1dtwJrKB3kM
     project: cn-north-4
     akskCustomerCipher: default
-  isolation:
-    Consumer:
-      timeout:
-        enabled: true
-      timeoutInMilliseconds: 20000
-  fallbackpolicy:
-    Consumer:
-      policy: throwexception
   edge:
     filter:
       addHeader:

@@ -34,11 +34,13 @@
 package org.apache.servicecomb.samples.mybatis;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.servicecomb.provider.rest.common.RestSchema;
 import org.apache.servicecomb.samples.mybatis.dao.IUserDao;
 import org.apache.servicecomb.samples.mybatis.entity.User;
 import org.apache.servicecomb.samples.mybatis.util.PropertiesUtil;
+import org.apache.servicecomb.swagger.invocation.exception.InvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,6 +61,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestSchema(schemaId = "RestEndpoint")
 @RequestMapping(path = "/operation")
 public class RestEndpoint implements Endpoint {
+    private static AtomicInteger count = new AtomicInteger(0);//线程安全的计数变量 
 	private final IUserDao userDao;
 
 	@Autowired
@@ -112,11 +115,18 @@ public class RestEndpoint implements Endpoint {
 	@Override
 	@DeleteMapping(value = "/deleteUser/{userName}")
 	public int deleteUser(@PathVariable String userName) {
-		User user = new User();
-		user.setUserName(userName);
-		System.out.println(user.toString());
-		int r = userDao.deleteUser(user);
-		return r;
+		count.incrementAndGet();
+		if((count.get())%3==0) {
+			System.out.println("----------------------"+count.get()+"----------------------");
+			User user = new User();
+			user.setUserName(userName);
+			System.out.println(user.toString());
+			int r = userDao.deleteUser(user);
+			return r;
+		}else {
+			System.out.println("----------------------"+count.get()+"----------------------");
+			throw new InvocationException(javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE, null);	
+		}
 	}
 	
 	

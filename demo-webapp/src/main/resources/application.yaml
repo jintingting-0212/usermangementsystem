@@ -14,25 +14,9 @@
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
-
 zuul:
   routes:
-    login: /login/**
-    dataoperation: /operation/**
-
-
-    
-
-    
-
-# disable netflix eurkea since it's not used for service discovery
-ribbon:
-  eureka:
-    enabled: false
+    edgeservice: /api/**
 
 server:
   port: 8890
-
-servicecomb:
-  tracing:
-    enabled: false

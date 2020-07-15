@@ -9,7 +9,7 @@
     	<module>demo-login</module>
     	<module>demo-operation</module>
     	<module>demo-webapp</module>
-		<module>demo-operation-beta</module>
-		<module>demo-edgeservice</module>
+    <module>demo-operation-beta</module>
+    <module>demo-edgeservice</module>
   </modules>
 </project>

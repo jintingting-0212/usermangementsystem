@@ -180,7 +180,7 @@
                 })
             })
             
-            var url1 = "http://edgeservice:30000/api/dataoperation/operation/findAllUsers?userName="+getUrlQueryString("userName");
+            var url1 = "edgeservice/api/dataoperation/operation/findAllUsers?userName="+getUrlQueryString("userName");
             
             $('#mytab').bootstrapTable({
                 url: url1,//数据源
@@ -264,7 +264,7 @@
             "click #update_btn":function(e,value,row,index)
                   {
                       console.log(row);
-                      window.location.href = 'modify.html?userName='+row.userName;
+                      window.location.href = 'modify.html?userName='+row.userName+'&serachName='+getUrlQueryString("userName");
                   },
         	  
               "click #del_btn":function(e,value,row,index)
@@ -287,7 +287,7 @@
           				if(result) {
           					$.ajax({
           			          method:"delete",
-          			          url:"http://edgeservice:30000/api/dataoperation/operation/deleteUser/"+row.userName,
+          			          url:"edgeservice/api/dataoperation/operation/deleteUser/"+row.userName,
           			          async: false,
           			          success:function (res) {			          	 
           			          	 $("#mytab").bootstrapTable('refresh');

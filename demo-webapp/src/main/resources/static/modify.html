@@ -207,7 +207,7 @@
 			email=null;
 		}
 		
-		var url = "http://edgeservice:30000/api/dataoperation/operation/modifyUser";
+		var url = "edgeservice/api/dataoperation/operation/modifyUser";
 		var data = {"userName": userName,"userRealName":userRealName,"telephone":telephone,"email":email};
 		
 		
@@ -222,7 +222,7 @@
 		    		setTimeout(function () {//做延时以便显示登录状态值
 			            console.log(res);
 			            showMsg("用户信息修改成功！");
-					    window.location.href = 'userInfo.html'
+					    window.location.href = 'userInfo.html?userName=' + getUrlQueryString("serachName")
 			       },100)
 		    	} else if(res==0){
 		    		showMsg("用户信息修改失败，请重试");//显示登录失败的原因

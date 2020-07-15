@@ -25,6 +25,10 @@
   </dependencyManagement>
 
   <dependencies>
+		<dependency>
+			<groupId>org.apache.servicecomb</groupId>
+			<artifactId>tracing-zipkin</artifactId>
+		</dependency>
 		<dependency> 
 		    <groupId>org.apache.servicecomb</groupId> 
 		    <artifactId>handler-publickey-auth</artifactId> 

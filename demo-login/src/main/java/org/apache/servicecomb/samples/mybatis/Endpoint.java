@@ -20,6 +20,8 @@ package org.apache.servicecomb.samples.mybatis;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.servicecomb.samples.mybatis.util.JwtToken;
 import org.apache.servicecomb.samples.mybatis.entity.User;
 

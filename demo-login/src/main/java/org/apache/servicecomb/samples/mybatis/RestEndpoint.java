@@ -37,11 +37,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.servicecomb.provider.rest.common.RestSchema;
 import org.apache.servicecomb.samples.mybatis.dao.IUserDao;
 import org.apache.servicecomb.samples.mybatis.entity.User;
 import org.apache.servicecomb.samples.mybatis.util.JedisUtil;
 import org.apache.servicecomb.samples.mybatis.util.JwtToken;
+import org.apache.servicecomb.swagger.invocation.exception.InvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,7 +62,6 @@ import redis.clients.jedis.Jedis;
 public class RestEndpoint implements Endpoint {
 
     private static AtomicInteger count = new AtomicInteger(0);//线程安全的计数变量   
-    private static int num = 0;  
 	private final IUserDao userDao;
 	
 	@Autowired
@@ -73,15 +75,12 @@ public class RestEndpoint implements Endpoint {
 		count.incrementAndGet();
 		if((count.get())%3==0) {
 			System.out.println("----------------------"+count.get()+"----------------------");
-			return "User Management System";
+			return "UMS";
 		}else {
-		try {
+
 			System.out.println("----------------------"+count.get()+"----------------------");
-			Thread.sleep(1000*60);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-			return "Sleep Stop";
+			throw new InvocationException(javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE, null);
+			
 		}
 	}
 
