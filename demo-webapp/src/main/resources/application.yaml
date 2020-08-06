@@ -20,3 +20,7 @@ zuul:
 
 server:
   port: 8890
+  
+ribbon:
+  ReadTimeout: 60000  
+  SocketTimeout: 60000
